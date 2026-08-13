@@ -1,0 +1,9 @@
+# Added 2026-08-13 while walking docs/operator-quickstart.md: step 1 tells you
+# to run `npm install` in kotoba/, and this repo had no .gitignore, so that
+# would leave thousands of untracked files in `git status` and make every
+# later step unreadable.
+node_modules/
+package-lock.json
+
+# vitest / vite scratch
+.vite-temp/

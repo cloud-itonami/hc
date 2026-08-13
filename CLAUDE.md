@@ -127,7 +127,7 @@ HC タスク完了時、`approve-assignment` handler が `Invoke("murakumo", "re
 
 **運営主体**: etzhayyim (עץ חיים) — 宗教法人・任意団体。規約・名簿は public blockchain 上に登記。日本国 宗教法人法 上の登記宗教法人ではない。契約上の defined nickname 「当社」は本サービス運営主体である etzhayyim を指す (`OPERATOR` 定数 SSoT)。
 
-**権威ソース**: `wasm/etzhayyim-wasm-hc-hc0mp7ng/svelte/src/lib/legal/contracts.ts` (`OPERATOR` / `OPERATOR_NOTE` / `EFFECTIVE_DATE` / `REV` constants)
+**権威ソース**: `appview/etzhayyim-wasm-hc-hc0mp7ng/svelte/src/lib/legal/contracts.ts` (`OPERATOR` / `OPERATOR_NOTE` / `EFFECTIVE_DATE` / `REV` constants)
 
 ### 契約書 4 種
 
@@ -241,8 +241,15 @@ HC タスク完了時、`approve-assignment` handler が `Invoke("murakumo", "re
 
 ## Build & Deploy
 
+> ⚠ **この節は現在通らない**（2026-08-13 実測）。`appview/` は
+> `@etzhayyim/kotodama-host-sdk` と `@etzhayyim/design-system` を `workspace:*` で
+> 参照しているが、抽出でその workspace が置き去りになった（前者は npm registry も
+> **404**）。deploy 先の `hc0mp7ng.etzhayyim.com` 自体も **NXDOMAIN**。
+> 下記は workspace を張り直した後に想定される手順であって、今日踏める手順ではない。
+> 今日踏めるのは `kotoba/` だけ —— `docs/operator-quickstart.md` を参照。
+
 ```bash
-cd wasm/etzhayyim-wasm-hc-hc0mp7ng/svelte
+cd appview/etzhayyim-wasm-hc-hc0mp7ng/svelte
 pnpm install && pnpm build
 cd ..
 etzhayyim build
