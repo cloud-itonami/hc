@@ -241,10 +241,12 @@ HC タスク完了時、`approve-assignment` handler が `Invoke("murakumo", "re
 
 ## Build & Deploy
 
-> ⚠ **この節は現在通らない**（2026-08-13 実測）。`pnpm install` が
-> `@etzhayyim/design-system@workspace:*` を解決できない —— 抽出で workspace が
-> 置き去りになったため。再現とエラー本文は `docs/operator-quickstart.md` §2-3。
-> 下記はワークスペース復元後に想定される手順であって、今日踏める手順ではない。
+> ⚠ **この節は現在通らない**（2026-08-13 実測）。`appview/` は
+> `@etzhayyim/kotodama-host-sdk` と `@etzhayyim/design-system` を `workspace:*` で
+> 参照しているが、抽出でその workspace が置き去りになった（前者は npm registry も
+> **404**）。deploy 先の `hc0mp7ng.etzhayyim.com` 自体も **NXDOMAIN**。
+> 下記は workspace を張り直した後に想定される手順であって、今日踏める手順ではない。
+> 今日踏めるのは `kotoba/` だけ —— `docs/operator-quickstart.md` を参照。
 
 ```bash
 cd appview/etzhayyim-wasm-hc-hc0mp7ng/svelte

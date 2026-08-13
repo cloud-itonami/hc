@@ -34,19 +34,20 @@ repo `com-etzhayyim-app-hc`; that is the migration record, left as-is.
 
 ## Read this before `CLAUDE.md`: it is a design document, not an inventory
 
-`CLAUDE.md` (12,565 B) describes HCCommandService / HCQueryService, eight Arrow
+`CLAUDE.md` (12,970 B) describes HCCommandService / HCQueryService, eight Arrow
 tables (`hc_shifts`, `hc_tasks`, …), CreateShift / BookShift / CheckIn /
 CheckOut / ApproveAssignment, Matrix rooms, USDC escrow, and yoro credit
 rewards. **None of those names appear in source.** `CreateShift` is a string in
 `CLAUDE.md` only.
 
-What is actually here, counted on 2026-08-13 at `02156a4` (37 tracked files;
-tree-identical to west pin `124b53b` — the 6 commits between them add and
-remove the same DID-shell files):
+What is actually here, counted on 2026-08-13 at `02156a4` — the commit before
+this documentation landed (37 tracked files; tree-identical to west pin
+`124b53b`, because the 6 commits between them add and remove the same DID-shell
+files). Adding these docs took the tree to 41 files:
 
 | `CLAUDE.md` says | actually here |
 |---|---|
-| `CreateShift` / `BookShift` / `CheckIn` / `CheckOut` / `ApproveAssignment` | **0 occurrences** outside `CLAUDE.md` |
+| `CreateShift` / `BookShift` / `CheckIn` / `CheckOut` / `ApproveAssignment` | **0 occurrences** in source — they appear only in `CLAUDE.md` and in this README's tables |
 | HCCommandService / HCQueryService on `hc0mp7ng.etzhayyim.com/xrpc` | host is **NXDOMAIN**; no Envoy, no those service names |
 | 8 Arrow tables | no `.sql` / no Arrow schema file. `app.ts` reads `vertex_hc_*` via `@etzhayyim/kotodama-host-sdk` |
 | Matrix `actor.SendRoomEvent` | no Matrix client in this tree |
