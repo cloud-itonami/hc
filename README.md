@@ -6,15 +6,16 @@ Japanese labour-law checks and Matrix notifications. **This repository is the
 app extraction of that design, not a running platform.** The only thing you can
 execute from a clone is the `kotoba/` record layer (public contract-template
 catalog + E2E-encrypted service-provider KYC applications). The host-sdk Worker
-(`appview/etzhayyim-wasm-hc-hc0mp7ng/src/app.ts`, `appview/etzhayyim-wasm-kyc-kyc49bb7`)
-and the KYC tree's Svelte UI do not install, because they still depend on a
-`workspace:*` that the extraction left behind. The hc tree's frontend was
-migrated from Svelte to ClojureScript (reagent + re-frame + jp-go-dds) on
-2026-08-26 — `appview/etzhayyim-wasm-hc-hc0mp7ng/cljs/` has no `workspace:*`
-dependency and does `npm install` + build standalone (see the Build section
-below for the actual transcript). That does not make the app runnable: the
-Worker it would mount into still doesn't install, and the deploy host is still
-NXDOMAIN.
+(`appview/etzhayyim-wasm-hc-hc0mp7ng/src/app.ts`) does not install, because it
+still depends on a `workspace:*` that the extraction left behind. Both
+appviews' frontends were migrated from Svelte to ClojureScript (reagent +
+re-frame + jp-go-dds) on 2026-08-26 — `appview/etzhayyim-wasm-hc-hc0mp7ng/cljs/`
+and `appview/etzhayyim-wasm-kyc-kyc49bb7/cljs/` have no `workspace:*`
+dependency and each does `npm install` + build standalone (see the Build
+section below for the actual transcript). That does not make either app
+runnable: the Worker the hc frontend would mount into still doesn't install,
+the KYC tree has no `src/app.ts` Worker at all to mount into, and the deploy
+host is still NXDOMAIN.
 
 - **Identity (kotoba)**: `did:web:hc.etzhayyim.com`
 - **Nanoid**: `hc0mp7ng`
@@ -80,7 +81,8 @@ kotoba/                                              runnable record layer
 appview/etzhayyim-wasm-hc-hc0mp7ng/src/app.ts        61,563 B host-sdk Worker — does not install
 appview/etzhayyim-wasm-hc-hc0mp7ng/cljs/             reagent + re-frame + jp-go-dds, npm install + shadow-cljs build (2026-08-26 migration)
 appview/etzhayyim-wasm-hc-hc0mp7ng/legal/            contracts.ts (moved out of svelte/ before it was deleted)
-appview/etzhayyim-wasm-kyc-kyc49bb7/                 second scaffold; no src/app.ts; still Svelte
+appview/etzhayyim-wasm-kyc-kyc49bb7/                 second scaffold; no src/app.ts
+appview/etzhayyim-wasm-kyc-kyc49bb7/cljs/            reagent + re-frame + jp-go-dds, npm install + shadow-cljs build (2026-08-26 migration)
 ```
 
 **Only `kotoba/` is runnable.** See
@@ -93,17 +95,22 @@ for that name, so `npm install` there has nothing to resolve. That is the
 Worker (`src/app.ts`), unaffected by the frontend migration below. There is no
 `component.wasm`.
 
-The hc tree's frontend used to be `svelte/`, which added
+Both appviews' frontends used to be `svelte/`, each adding
 `@etzhayyim/design-system` at `workspace:*` on top of the Worker's broken
-install — its `App.svelte` was 442 B: `<h1>etzhayyim-wasm-hc-hc0mp7ng</h1>`
-plus "Vite entry scaffold after SvelteKit cleanup." On 2026-08-26 that Svelte
-scaffold was migrated to `cljs/` (reagent + re-frame + jp-go-dds,
-`src/hc/app.cljs`), which has no `workspace:*` dependency; the same two
-strings (heading + description) now live as `hc.app/default-db` data and are
-asserted by `test/hc/app_test.cljs`. **The KYC tree (`etzhayyim-wasm-kyc-kyc49bb7`)
-was not touched by this migration** — its `App.svelte` is still the same
-placeholder with a different `<h1>`, and it still depends on
-`@etzhayyim/design-system` at `workspace:*`.
+install — the hc tree's `App.svelte` was 442 B: `<h1>etzhayyim-wasm-hc-hc0mp7ng</h1>`
+plus "Vite entry scaffold after SvelteKit cleanup."; the KYC tree's
+`App.svelte` was the same placeholder shape with a different `<h1>`
+(`etzhayyim-wasm-kyc-kyc49bb7`). On 2026-08-26 both Svelte scaffolds were
+migrated to `cljs/` (reagent + re-frame + jp-go-dds — `src/hc/app.cljs` and
+`src/kyc/app.cljs` respectively), neither of which has a `workspace:*`
+dependency; the same two strings (heading + description) per tree now live
+as `hc.app/default-db` / `kyc.app/default-db` data and are asserted by
+`test/hc/app_test.cljs` / `test/kyc/app_test.cljs`. The KYC tree's
+`svelte/` had no `+server.ts`, no `static/` build artifacts, and no
+non-Svelte domain-data module (unlike the hc tree's `contracts.ts`), so
+nothing needed to move out before it was deleted. The KYC tree still has no
+`src/app.ts` Worker — only the frontend scaffold was ever there — so its
+`cljs/` build has nothing to mount into either.
 
 `app.ts` **does** register 34 NSIDs (`com.etzhayyim.apps.hc.listHc` …
 `getIntakeSummary`, including game-capture and KYC document review). That is
