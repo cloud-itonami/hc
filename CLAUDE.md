@@ -127,7 +127,11 @@ HC タスク完了時、`approve-assignment` handler が `Invoke("murakumo", "re
 
 **運営主体**: etzhayyim (עץ חיים) — 宗教法人・任意団体。規約・名簿は public blockchain 上に登記。日本国 宗教法人法 上の登記宗教法人ではない。契約上の defined nickname 「当社」は本サービス運営主体である etzhayyim を指す (`OPERATOR` 定数 SSoT)。
 
-**権威ソース**: `appview/etzhayyim-wasm-hc-hc0mp7ng/svelte/src/lib/legal/contracts.ts` (`OPERATOR` / `OPERATOR_NOTE` / `EFFECTIVE_DATE` / `REV` constants)
+**権威ソース**: `appview/etzhayyim-wasm-hc-hc0mp7ng/legal/contracts.ts` (`OPERATOR` / `OPERATOR_NOTE` / `EFFECTIVE_DATE` / `REV` constants)。
+2026-08-26 のフロントエンド Svelte→ClojureScript 移行で `svelte/src/lib/legal/`
+から `legal/`（`cljs/` の隣、フレームワーク非依存の sibling dir）へ移した — この
+ファイルは Svelte 構文を持たないプレーンな TS データモジュールで、どちらの
+frontend からも import されていなかったため。
 
 ### 契約書 4 種
 
@@ -241,16 +245,23 @@ HC タスク完了時、`approve-assignment` handler が `Invoke("murakumo", "re
 
 ## Build & Deploy
 
-> ⚠ **この節は現在通らない**（2026-08-13 実測）。`appview/` は
-> `@etzhayyim/kotodama-host-sdk` と `@etzhayyim/design-system` を `workspace:*` で
-> 参照しているが、抽出でその workspace が置き去りになった（前者は npm registry も
-> **404**）。deploy 先の `hc0mp7ng.etzhayyim.com` 自体も **NXDOMAIN**。
-> 下記は workspace を張り直した後に想定される手順であって、今日踏める手順ではない。
-> 今日踏めるのは `kotoba/` だけ —— `docs/operator-quickstart.md` を参照。
+> ⚠ **この節は現在通らない**（2026-08-13 実測、2026-08-26 のフロントエンド
+> Svelte→ClojureScript 移行後も後半は未解消）。旧 `svelte/` の
+> `@etzhayyim/design-system` `workspace:*` 依存は移行で消え、`cljs/` は
+> plain `npm install` + `shadow-cljs compile app` で単独ビルドできる（本移行の
+> commit で実測済み — このファイルの Build 節参照）。ただし `appview/` 直下の
+> `package.json`（backend Worker、`src/app.ts`）は今も
+> `@etzhayyim/kotodama-host-sdk` を `workspace:*` で参照しており、抽出でその
+> workspace が置き去りになったまま（npm registry も **404**）。deploy 先の
+> `hc0mp7ng.etzhayyim.com` 自体も **NXDOMAIN**。**フロントエンドのビルドが直った
+> ことは、この節全体が通ることを意味しない** — 下記は backend の workspace を
+> 張り直し、DNS が解決するようになった後に想定される手順であって、今日踏める
+> 手順ではない。今日踏めるのは `kotoba/` と `cljs/` のビルドだけ ——
+> `docs/operator-quickstart.md` を参照。
 
 ```bash
-cd appview/etzhayyim-wasm-hc-hc0mp7ng/svelte
-pnpm install && pnpm build
+cd appview/etzhayyim-wasm-hc-hc0mp7ng/cljs
+npm install && npm run build   # shadow-cljs compile app
 cd ..
 etzhayyim build
 etzhayyim deploy --smoke-url https://hc0mp7ng.etzhayyim.com/health
