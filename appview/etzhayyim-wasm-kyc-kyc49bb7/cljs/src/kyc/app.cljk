@@ -10,7 +10,7 @@
   root README / CLAUDE.md for what is and is not implemented (README.md:
   'This repository is the app extraction of that design, not a running
   platform'). This repo's other appview,
-  `appview/etzhayyim-wasm-hc-hc0mp7ng/cljs/src/hc/app.cljs`, was migrated
+  `appview/etzhayyim-wasm-hc-hc0mp7ng/cljs/src/hc/app.cljk`, was migrated
   the same way on 2026-08-26 and is the reference this port follows
   verbatim, one namespace over.
 
