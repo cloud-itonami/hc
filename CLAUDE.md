@@ -248,7 +248,7 @@ frontend からも import されていなかったため。
 > ⚠ **この節は現在通らない**（2026-08-13 実測、2026-08-26 のフロントエンド
 > Svelte→ClojureScript 移行後も後半は未解消）。旧 `svelte/` の
 > `@etzhayyim/design-system` `workspace:*` 依存は移行で消え、`cljs/` は
-> plain `npm install` + `shadow-cljs compile app` で単独ビルドできる（本移行の
+> plain `npm install` + `amu compile --target wasm32-browser app` で単独ビルドできる（本移行の
 > commit で実測済み — このファイルの Build 節参照）。ただし `appview/` 直下の
 > `package.json`（backend Worker、`src/app.ts`）は今も
 > `@etzhayyim/kotodama-host-sdk` を `workspace:*` で参照しており、抽出でその
@@ -261,7 +261,7 @@ frontend からも import されていなかったため。
 
 ```bash
 cd appview/etzhayyim-wasm-hc-hc0mp7ng/cljs
-npm install && npm run build   # shadow-cljs compile app
+npm install && npm run build   # amu compile --target wasm32-browser app
 cd ..
 etzhayyim build
 etzhayyim deploy --smoke-url https://hc0mp7ng.etzhayyim.com/health
