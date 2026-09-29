@@ -1,7 +1,7 @@
 # hc — Human Computing *app extraction* (not the live platform)
 
 `hc` is **human computing**: a gig-shift + micro-task marketplace that
-`CLAUDE.md` specifies as Timee-style booking plus MTurk-style HITs, with
+`AGENTS.md` specifies as Timee-style booking plus MTurk-style HITs, with
 Japanese labour-law checks and Matrix notifications. **This repository is the
 app extraction of that design, not a running platform.** The only thing you can
 execute from a clone is the `kotoba/` record layer (public contract-template
@@ -40,22 +40,22 @@ the sibling is `20-actors/`. GitHub still redirects the old names separately —
 because the owner of that shell is `hc-actor`. `README.edn` still names this
 repo `com-etzhayyim-app-hc`; that is the migration record, left as-is.
 
-## Read this before `CLAUDE.md`: it is a design document, not an inventory
+## Read this before `AGENTS.md`: it is a design document, not an inventory
 
-`CLAUDE.md` (12,970 B) describes HCCommandService / HCQueryService, eight Arrow
+`AGENTS.md` (12,970 B) describes HCCommandService / HCQueryService, eight Arrow
 tables (`hc_shifts`, `hc_tasks`, …), CreateShift / BookShift / CheckIn /
 CheckOut / ApproveAssignment, Matrix rooms, USDC escrow, and yoro credit
 rewards. **None of those names appear in source.** `CreateShift` is a string in
-`CLAUDE.md` only.
+`AGENTS.md` only.
 
 What is actually here, counted on 2026-08-13 at `02156a4` — the commit before
 this documentation landed (37 tracked files; tree-identical to west pin
 `124b53b`, because the 6 commits between them add and remove the same DID-shell
 files). Adding these docs took the tree to 41 files:
 
-| `CLAUDE.md` says | actually here |
+| `AGENTS.md` says | actually here |
 |---|---|
-| `CreateShift` / `BookShift` / `CheckIn` / `CheckOut` / `ApproveAssignment` | **0 occurrences** in source — they appear only in `CLAUDE.md` and in this README's tables |
+| `CreateShift` / `BookShift` / `CheckIn` / `CheckOut` / `ApproveAssignment` | **0 occurrences** in source — they appear only in `AGENTS.md` and in this README's tables |
 | HCCommandService / HCQueryService on `hc0mp7ng.etzhayyim.com/xrpc` | host is **NXDOMAIN**; no Envoy, no those service names |
 | 8 Arrow tables | no `.sql` / no Arrow schema file. `app.ts` reads `vertex_hc_*` via `@etzhayyim/kotodama-host-sdk` |
 | Matrix `actor.SendRoomEvent` | no Matrix client in this tree |
@@ -71,7 +71,7 @@ again, from `svelte/src/lib/legal/contracts.ts` to the sibling
 untouched — see the current tree below), because it is a plain TS data module
 with no Svelte syntax and nothing in either frontend imported it.
 
-That is not a criticism of `CLAUDE.md` — it came across verbatim from
+That is not a criticism of `AGENTS.md` — it came across verbatim from
 `etzhayyim/root`. It is a criticism of reading it as a status report.
 
 ## What is actually here

@@ -7,7 +7,7 @@
   'Vite entry scaffold after SvelteKit cleanup.') to reagent + re-frame,
   rendered with `jp-go-dds.core` (デジタル庁デザインシステム) hiccup. This is
   still a scaffold, not a running KYC/KYB verification UI — see the repo's
-  root README / CLAUDE.md for what is and is not implemented (README.md:
+  root README / AGENTS.md for what is and is not implemented (README.md:
   'This repository is the app extraction of that design, not a running
   platform'). This repo's other appview,
   `appview/etzhayyim-wasm-hc-hc0mp7ng/cljs/src/hc/app.cljk`, was migrated
