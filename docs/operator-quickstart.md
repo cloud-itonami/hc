@@ -126,7 +126,7 @@ The two files are not the same kind of test:
 | `test/hc.test.ts` | 5 behavioural cases — register / get / list / encrypt / coverage |
 | `test/readme-example.test.ts` | 5 cases asserting every value printed in `README.md` |
 
-The second exists so the README cannot drift the way `CLAUDE.md` already has.
+The second exists so the README cannot drift the way `AGENTS.md` already has.
 
 ## 3. Prove the suite can fail
 
@@ -190,4 +190,4 @@ is how the README example was verified.
   `MethodNotImplemented`.
 - **Install or run either `appview/` tree.** `workspace:*` does not resolve.
 - **Create a shift, book a shift, check in, or pay USDC.** Those commands are
-  not in this repository. `CLAUDE.md` describes them.
+  not in this repository. `AGENTS.md` describes them.

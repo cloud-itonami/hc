@@ -7,13 +7,13 @@
   'Vite entry scaffold after SvelteKit cleanup.') to reagent + re-frame,
   rendered with `jp-go-dds.core` (デジタル庁デザインシステム) hiccup. This is
   still a scaffold, not the gig-shift + micro-task marketplace UI described in
-  the repo's root README / CLAUDE.md — see those for what is and is not
+  the repo's root README / AGENTS.md — see those for what is and is not
   implemented here (README.md: 'This repository is the app extraction of that
   design, not a running platform'). The XRPC service (`kotoba/src/registry.ts`)
   and the Worker entry (`src/app.ts`) are unaffected by this migration.
 
   The legal contract text module that used to live alongside the Svelte
-  scaffold at `svelte/src/lib/legal/contracts.ts` (17,912 B, CLAUDE.md's
+  scaffold at `svelte/src/lib/legal/contracts.ts` (17,912 B, AGENTS.md's
   §Contracts authoritative source) is not a Svelte file — it is plain data
   with no framework dependency — so it moved to a sibling
   `appview/etzhayyim-wasm-hc-hc0mp7ng/legal/contracts.ts` instead of being
